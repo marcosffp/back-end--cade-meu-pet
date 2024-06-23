@@ -12,12 +12,7 @@ const middlewares = jsonServer.defaults();
 
 const cors = require('cors');
 
-const corsOptions = {
-  origin: 'https://frontend-cade-meu-pet.vercel.app',
-  optionsSuccessStatus: 200
-};
-
-server.use(cors(corsOptions));
+server.use(cors());
 server.use(middlewares);
 server.use(router);
 server.use(express.json());
