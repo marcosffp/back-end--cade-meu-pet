@@ -14,7 +14,7 @@ const cors = require('cors');
 
 // Configurando CORS para permitir apenas solicitações de 'https://frontend-cade-meu-pet.vercel.app'
 const corsOptions = {
-  origin: 'https://frontend-cade-meu-pet.vercel.app',
+  origin: 'https://frontend-cade-meu-pet.vercel.app/html/Home.html',
   optionsSuccessStatus: 200 // Para compatibilidade com navegadores mais antigos
 };
 
