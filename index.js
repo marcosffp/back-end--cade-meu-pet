@@ -3,6 +3,7 @@ const session = require('express-session');
 const fs = require('fs');
 const path = require('path');
 const jsonServer = require('json-server');
+const cors = require('cors'); 
 
 const server = jsonServer.create();
 const filePath = path.join(__dirname, 'db', 'db.json');
