@@ -1,13 +1,20 @@
-const jsonServer = require('json-server');
 const express = require('express');
 const session = require('express-session');
+const fs = require('fs');
+const path = require('path');
+const jsonServer = require('json-server');
+
 const server = jsonServer.create();
-const router = jsonServer.router('./db/db.json');
-const cors = require('cors');
+const filePath = path.join(__dirname, 'db', 'db.json');
+const data = fs.readFileSync(filePath, "utf-8");
+const router = jsonServer.router(JSON.parse(data));
 const middlewares = jsonServer.defaults();
+
+const cors = require('cors');
 
 server.use(cors());
 server.use(middlewares);
+server.use(router);
 server.use(express.json());
 server.use(session({
   secret: 'mySecretKey',
@@ -64,7 +71,6 @@ server.get('/check-email', (req, res) => {
   res.status(200).json({ message: 'Email disponível' });
 });
 
-server.use(router);
 
 server.listen(3000, () => {
   console.log('JSON Server is running em http://localhost:3000');
