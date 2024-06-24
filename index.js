@@ -59,19 +59,18 @@ server.get('/me', authenticateUser, (req, res) => {
   res.json(req.session.user);
 });
 
+// Rota para verificar email
 server.get('/check-email', (req, res) => {
   const { email } = req.query;
   console.log(`Verificando email: ${email}`);
   const user = db.get('users').find(u => u.email.toLowerCase() === email.toLowerCase()).value();
   if (user) {
     console.log(`Email já utilizado: ${email}`);
-    return res.status(400).json({ message: 'Email já cadastrado' });
+    return res.status(404).json({ message: 'Email já cadastrado' });
   }
   console.log(`Email disponível: ${email}`);
   res.status(200).json({ message: 'Email disponível' });
 });
-
-
 
 server.listen(3000, () => {
   console.log('JSON Server is running em http://localhost:3000');
