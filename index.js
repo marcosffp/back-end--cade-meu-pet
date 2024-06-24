@@ -12,7 +12,7 @@ const middlewares = jsonServer.defaults();
 
 const cors = require('cors');
 
-
+server.use(cors());
 server.use(middlewares);
 server.use(router);
 server.use(express.json());
@@ -61,15 +61,16 @@ server.get('/me', authenticateUser, (req, res) => {
 
 server.get('/check-email', (req, res) => {
   const { email } = req.query;
-  console.log(Verificando email: ${email}); // Log para verificar o email recebido
+  console.log(`Verificando email: ${email}`); // Log para verificar o email recebido
   const user = db.get('users').find({ email: email }).value();
   if (user) {
-    console.log(Email já utilizado: ${email}); // Log quando o email já está cadastrado
+    console.log(`Email já utilizado: ${email}`); // Log quando o email já está cadastrado
     return res.status(400).json({ message: 'Email já cadastrado' });
   }
-  console.log(Email disponível: ${email}); // Log quando o email está disponível
+  console.log(`Email disponível: ${email}`); // Log quando o email está disponível
   res.status(200).json({ message: 'Email disponível' });
 });
+
 
 server.listen(3000, () => {
   console.log('JSON Server is running em http://localhost:3000');
