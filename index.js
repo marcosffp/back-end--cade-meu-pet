@@ -59,7 +59,7 @@ server.get('/me', authenticateUser, (req, res) => {
   res.json(req.session.user);
 });
 
-// Rota para verificar email
+/*// Rota para verificar email
 server.get('/check-email', (req, res) => {
   const { email } = req.query;
   console.log(`Verificando email: ${email}`);
@@ -70,7 +70,7 @@ server.get('/check-email', (req, res) => {
   }
   console.log(`Email disponível: ${email}`);
   res.status(200).json({ message: 'Email disponível' });
-});
+});*/
 
 server.listen(3000, () => {
   console.log('JSON Server is running em http://localhost:3000');
