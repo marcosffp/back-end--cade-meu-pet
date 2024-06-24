@@ -61,15 +61,16 @@ server.get('/me', authenticateUser, (req, res) => {
 
 server.get('/check-email', (req, res) => {
   const { email } = req.query;
-  console.log(`Verificando email: ${email}`); // Log para verificar o email recebido
-  const user = db.get('users').find({ email: email }).value();
+  console.log(`Verificando email: ${email}`);
+  const user = db.get('users').find(u => u.email.toLowerCase() === email.toLowerCase()).value();
   if (user) {
-    console.log(`Email já utilizado: ${email}`); // Log quando o email já está cadastrado
+    console.log(`Email já utilizado: ${email}`);
     return res.status(400).json({ message: 'Email já cadastrado' });
   }
-  console.log(`Email disponível: ${email}`); // Log quando o email está disponível
+  console.log(`Email disponível: ${email}`);
   res.status(200).json({ message: 'Email disponível' });
 });
+
 
 
 server.listen(3000, () => {
