@@ -12,13 +12,7 @@ const middlewares = jsonServer.defaults();
 
 const cors = require('cors');
 
-// Configurando CORS para permitir apenas solicitações de 'https://frontend-cade-meu-pet.vercel.app'
-const corsOptions = {
-  origin: 'https://frontend-cade-meu-pet.vercel.app',
-  optionsSuccessStatus: 200 // Para compatibilidade com navegadores mais antigos
-};
 
-server.use(cors(corsOptions));
 server.use(middlewares);
 server.use(router);
 server.use(express.json());
